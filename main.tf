@@ -58,7 +58,14 @@ resource "aws_network_interface" "ansible-nic" {
     "Name" = "Ansible-Terraform-NI"
   }
 }
-
+resource "aws_eip" "ip-one" {
+  domain                    = "vpc"
+  network_interface         = aws_network_interface.ansible-nic.id
+  depends_on                = [aws_instance.terraformvms]
+  tags = {
+    "Name" = "Ansible-Terraform-EIP"
+  }
+}
 resource "aws_security_group" "web-pub-sg" {
   name        = "Ansible_SG"                ### Survey
   description = "allow inbound traffic"
