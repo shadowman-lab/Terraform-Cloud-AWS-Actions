@@ -97,7 +97,6 @@ resource "aws_security_group" "web-pub-sg" {
 resource "aws_instance" "terraformvms" {
   instance_type = "t2.micro"
   count         = var.number_of_instances
-  associate_public_ip_address = true
   ami           = var.ami_map[var.rhel_version]
   network_interface {
     network_interface_id = aws_network_interface.ansible-nic[count.index].id
