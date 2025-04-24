@@ -52,7 +52,7 @@ resource "aws_route" "internet-route" {
 resource "aws_network_interface" "ansible-nic" {
   count           = var.number_of_instances
   subnet_id       = aws_subnet.public.id
-  private_ips     = ["11.0.1.${count.index}"]
+  private_ips     = ["11.0.1.12${count.index}"]
   security_groups = [aws_security_group.web-pub-sg.id]
   tags = {
     "Name" = "Ansible-Terraform-NI"
