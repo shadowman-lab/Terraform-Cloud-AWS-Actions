@@ -60,10 +60,11 @@ resource "aws_network_interface" "ansible-nic" {
 }
 resource "aws_eip" "ip-one" {
   domain                    = "vpc"
-  network_interface         = aws_network_interface.ansible-nic.id
+  count                     = var.number_of_instances
+  network_interface         = aws_network_interface.ansible-nic[count.index].id
   depends_on                = [aws_instance.terraformvms]
   tags = {
-    "Name" = "Ansible-Terraform-EIP"
+    "Name" = "Ansible-Terraform-EIP${count.index}"
   }
 }
 resource "aws_security_group" "web-pub-sg" {
