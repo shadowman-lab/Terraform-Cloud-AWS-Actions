@@ -1,6 +1,21 @@
 provider "aws" {
   region     = "us-east-2"
 }
+
+data "aws_ami" "rhelami" {
+  most_recent      = true
+  owners           = ["309956199498"]
+
+  filter {
+    name   = "name"
+    values = ["${var.lookup_map[var.rhel_version]}*HVM-*Access2*"]
+  }
+   filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+}
+
 resource "aws_vpc" "ansiblevpc" {
   cidr_block = "11.0.0.0/16"
   enable_dns_hostnames = true
@@ -98,7 +113,7 @@ resource "aws_security_group" "web-pub-sg" {
 resource "aws_instance" "terraformvms" {
   instance_type = "t2.micro"
   count         = var.number_of_instances
-  ami           = var.ami_map[var.rhel_version]
+  ami           = data.aws_ami.rhelami.id
   network_interface {
     network_interface_id = aws_network_interface.ansible-nic[count.index].id
     device_index         = 0

@@ -12,6 +12,15 @@ variable "ami_map" {
   }
 }
 
+variable "lookup_map" {
+  type = map(string)
+  default = {
+    "RHEL7" = "RHEL-7.9"
+    "RHEL8" = "RHEL-8.10"
+    "RHEL9" = "RHEL-9.5"
+  }
+}
+
 variable "instance_name_convention" {
   description = "VM instance name convention"
   default     = "web"
