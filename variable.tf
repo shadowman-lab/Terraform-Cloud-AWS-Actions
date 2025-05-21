@@ -22,7 +22,8 @@ variable "lookup_map" {
   default = {
     "RHEL7" = "RHEL-7.9"
     "RHEL8" = "RHEL-8.10"
-    "RHEL9" = "RHEL-9.5"
+    "RHEL9" = "RHEL-9.6"
+    "RHEL10" = "RHEL-10.0"
   }
 }
 

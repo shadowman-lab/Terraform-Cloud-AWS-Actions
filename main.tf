@@ -8,7 +8,7 @@ data "aws_ami" "rhelami" {
 
   filter {
     name   = "name"
-    values = ["${var.lookup_map[var.rhel_version]}*HVM-*Access2*"]
+    values = ["${var.lookup_map[var.rhel_version]}*HVM*-*Access2*"]
   }
    filter {
     name   = "architecture"
