@@ -73,15 +73,15 @@ resource "aws_network_interface" "ansible-nic" {
     "Name" = "Ansible-Terraform-NI"
   }
 }
-resource "aws_eip" "ip-one" {
-  domain                    = "vpc"
-  count                     = var.number_of_instances
-  network_interface         = aws_network_interface.ansible-nic[count.index].id
-  depends_on                = [aws_instance.terraformvms]
-  tags = {
-    "Name" = "Ansible-Terraform-EIP${count.index}"
-  }
-}
+#resource "aws_eip" "ip-one" {
+#  domain                    = "vpc"
+#  count                     = var.number_of_instances
+#  network_interface         = aws_network_interface.ansible-nic[count.index].id
+#  depends_on                = [aws_instance.terraformvms]
+#  tags = {
+#    "Name" = "Ansible-Terraform-EIP${count.index}"
+#  }
+#}
 resource "aws_security_group" "web-pub-sg" {
   name        = "Ansible_SG"                ### Survey
   description = "allow inbound traffic"
@@ -114,6 +114,7 @@ resource "aws_instance" "terraformvms" {
   instance_type = "t2.micro"
   count         = var.number_of_instances
   ami           = data.aws_ami.rhelami.id
+  associate_public_ip_address = true
   network_interface {
     network_interface_id = aws_network_interface.ansible-nic[count.index].id
     device_index         = 0
