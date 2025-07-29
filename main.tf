@@ -115,6 +115,7 @@ resource "aws_instance" "terraformvms" {
   count         = var.number_of_instances
   ami           = data.aws_ami.rhelami.id
   associate_public_ip_address = true
+  subnet_id       = aws_subnet.public.id
   vpc_security_group_ids = [aws_security_group.web-pub-sg.id]
 #  network_interface {
 #    network_interface_id = aws_network_interface.ansible-nic[count.index].id
