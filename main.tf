@@ -64,14 +64,14 @@ resource "aws_route" "internet-route" {
   route_table_id         = aws_route_table.ansible-rt.id
   gateway_id             = aws_internet_gateway.ansible-igw.id
 }
-resource "aws_network_interface" "ansible-nic" {
-  count           = var.number_of_instances
-  subnet_id       = aws_subnet.public.id
-  private_ips     = ["11.0.1.12${count.index}"]
-  security_groups = [aws_security_group.web-pub-sg.id]
-  tags = {
-    "Name" = "Ansible-Terraform-NI"
-  }
+#resource "aws_network_interface" "ansible-nic" {
+#  count           = var.number_of_instances
+#  subnet_id       = aws_subnet.public.id
+#  private_ips     = ["11.0.1.12${count.index}"]
+#  security_groups = [aws_security_group.web-pub-sg.id]
+#  tags = {
+#    "Name" = "Ansible-Terraform-NI"
+#  }
 }
 #resource "aws_eip" "ip-one" {
 #  domain                    = "vpc"
@@ -115,9 +115,10 @@ resource "aws_instance" "terraformvms" {
   count         = var.number_of_instances
   ami           = data.aws_ami.rhelami.id
   associate_public_ip_address = true
-  network_interface {
-    network_interface_id = aws_network_interface.ansible-nic[count.index].id
-    device_index         = 0
+  vpc_security_group_ids = [aws_security_group.web-pub-sg.id]
+#  network_interface {
+#    network_interface_id = aws_network_interface.ansible-nic[count.index].id
+#    device_index         = 0
 delete_on_termination = false
   }
   key_name = "Shadowmankey"
