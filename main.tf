@@ -119,8 +119,8 @@ resource "aws_instance" "terraformvms" {
 #  network_interface {
 #    network_interface_id = aws_network_interface.ansible-nic[count.index].id
 #    device_index         = 0
-delete_on_termination = false
-  }
+# delete_on_termination = false
+#  }
   key_name = "Shadowmankey"
   tags = {
       Name = "${var.instance_name_convention}${count.index}.shadowman.dev"
