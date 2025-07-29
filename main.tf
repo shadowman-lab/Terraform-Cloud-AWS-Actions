@@ -72,7 +72,7 @@ resource "aws_route" "internet-route" {
 #  tags = {
 #    "Name" = "Ansible-Terraform-NI"
 #  }
-}
+#}
 #resource "aws_eip" "ip-one" {
 #  domain                    = "vpc"
 #  count                     = var.number_of_instances
