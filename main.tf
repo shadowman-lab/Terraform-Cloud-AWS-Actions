@@ -98,4 +98,24 @@ resource "aws_instance" "terraformvms" {
       operating_system: var.rhel_version
       usage: "shadowmandemos"
       }
+
+  lifecycle {
+    action_trigger {
+      events = [after_create]
+      actions = [action.aap_eda_eventstream_post.create]
+    }
+  }
+}
+
+action "aap_eda_eventstream_post" "create" {
+  config {
+    template_type = "workflow_job"
+    workflow_job_template_name = "Config VM, Deploy Web App with Failure Paths Citrix"
+    organization_name = "Infrastructure"
+    event_stream_config = {
+      url = var.aap_eda_eventstream_url
+      username = var.aap_eda_eventstream_username
+      password = var.aap_eda_eventstream_password
+    }
+  }
 }
