@@ -13,11 +13,6 @@ variable "aap_eda_eventstream_url" {
   default     = ""
 }
 
-variable "aap_eda_eventstream_url" {
-  description = "Ansible Event Stream URL"
-  default     = ""
-}
-
 variable "aap_eda_eventstream_username" {
   description = "Ansible Event Stream Username"
   default     = ""
