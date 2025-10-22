@@ -8,6 +8,27 @@ variable "ticket_number" {
   default     = ""
 }
 
+variable "aap_eda_eventstream_url" {
+  description = "Ansible Event Stream URL"
+  default     = ""
+}
+
+variable "aap_eda_eventstream_url" {
+  description = "Ansible Event Stream URL"
+  default     = ""
+}
+
+variable "aap_eda_eventstream_username" {
+  description = "Ansible Event Stream Username"
+  default     = ""
+}
+
+variable "aap_eda_eventstream_password" {
+  description = "Ansible Event Stream Password"
+  default     = ""
+  sensitive   = true
+}
+
 variable "ami_map" {
   type = map(string)
   default = {
