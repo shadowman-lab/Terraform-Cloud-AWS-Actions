@@ -112,7 +112,7 @@ action "aap_eda_eventstream_post" "create" {
   config {
     template_type = "workflow_job"
     limit = aws_instance.terraformvms[count.index].tags.Name
-    workflow_job_template_name = "Config VM, Deploy Web App with Failure Paths Citrix"
+    workflow_job_template_name = "Config VM, Deploy Web App with Failure Paths Citrix TF Actions"
     organization_name = "Infrastructure"
     event_stream_config = {
       url = var.aap_eda_eventstream_url
