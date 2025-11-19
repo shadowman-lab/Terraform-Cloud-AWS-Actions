@@ -108,6 +108,7 @@ resource "aws_instance" "terraformvms" {
 }
 
 action "aap_eda_eventstream_post" "create" {
+  count         = var.number_of_instances
   config {
     template_type = "workflow_job"
     limit = aws_instance.terraformvms[count.index].tags.Name
