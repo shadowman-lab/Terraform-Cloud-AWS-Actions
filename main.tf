@@ -102,7 +102,7 @@ resource "aws_instance" "terraformvms" {
   lifecycle {
     action_trigger {
       events = [after_create]
-      actions = [action.aap_eda_eventstream_post.create]
+      actions = [action.aap_eda_eventstream_post.create[count.index]]
     }
   }
 }
@@ -110,7 +110,7 @@ resource "aws_instance" "terraformvms" {
 action "aap_eda_eventstream_post" "create" {
   config {
     template_type = "workflow_job"
-    limit = aws_instance.terraformvms.tags.Name
+    limit = aws_instance.terraformvms[count.index].tags.Name
     workflow_job_template_name = "Config VM, Deploy Web App with Failure Paths Citrix"
     organization_name = "Infrastructure"
     event_stream_config = {
