@@ -101,7 +101,7 @@ resource "aws_instance" "terraformvms" {
 
   lifecycle {
     action_trigger {
-      events = [after_create]
+      events = [before_destroy]
       actions = [action.aap_eda_eventstream_post.create[count.index]]
     }
   }
