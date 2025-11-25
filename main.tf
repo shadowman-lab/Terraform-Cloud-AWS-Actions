@@ -1,8 +1,8 @@
 provider "aws" {
   region     = "us-east-2"
 }
+
 provider "aap" {
-  insecure_skip_verify = false
 }
 
 data "aws_ami" "rhelami" {
