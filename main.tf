@@ -145,6 +145,7 @@ action "aap_eda_eventstream_post" "create" {
 #       vm_name           = aws_instance.terraformvms[count.index].tags.Name
 #       ticket_number     = var.ticket_number
 #       shadowman_provision_hypervisor = "AWS"
+#       operating_system  = var.rhel_version
 #     })
 #   }
 #   }
