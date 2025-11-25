@@ -139,7 +139,7 @@ action "aap_eda_eventstream_post" "create" {
 #   action "aap_workflow_job_launch" "aftercreate" {
 #   count                 = var.number_of_instances
 #   config {
-#     job_template_id     = 1279
+#     workflow_job_template_id     = 1279
 #     wait_for_completion = true
 #     wait_for_completion_timeout_seconds = 600
 #     extra_vars          = jsonencode({
@@ -153,7 +153,7 @@ action "aap_eda_eventstream_post" "create" {
 #   action "aap_workflow_job_launch" "beforedestroy" {
 #   count                 = var.number_of_instances
 #   config {
-#     job_template_id     = 958
+#     workflow_job_template_id     = 958
 #     wait_for_completion = true
 #     wait_for_completion_timeout_seconds = 300
 #     extra_vars          = jsonencode({
