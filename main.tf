@@ -141,6 +141,7 @@ action "aap_eda_eventstream_post" "create" {
 #   config {
 #     job_template_id     = 1279
 #     wait_for_completion = true
+#     wait_for_completion_timeout_seconds = 600
 #     extra_vars          = jsonencode({
 #       vm_name           = aws_instance.terraformvms[count.index].tags.Name
 #       ticket_number     = var.ticket_number
@@ -154,6 +155,7 @@ action "aap_eda_eventstream_post" "create" {
 #   config {
 #     job_template_id     = 958
 #     wait_for_completion = true
+#     wait_for_completion_timeout_seconds = 300
 #     extra_vars          = jsonencode({
 #       vm_name           = aws_instance.terraformvms[count.index].tags.Name
 #       ticket_number     = var.ticket_number
@@ -165,6 +167,7 @@ action "aap_eda_eventstream_post" "create" {
 #   config {
 #     job_template_id     = 1282
 #     wait_for_completion = true
+#     wait_for_completion_timeout_seconds = 120
 #     extra_vars          = jsonencode({
 #       shadowman_provision_hypervisor = "AWS"
 #     })
