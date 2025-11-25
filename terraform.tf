@@ -6,7 +6,6 @@ terraform {
     }
     aap = {
       source = "ansible/aap"
-      version = "1.4.0-devpreview1"
     }
   }
   required_version = "~> 1.2"

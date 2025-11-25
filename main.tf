@@ -1,6 +1,8 @@
 provider "aws" {
   region     = "us-east-2"
 }
+provider "aap" {
+}
 
 data "aws_ami" "rhelami" {
   most_recent      = true
