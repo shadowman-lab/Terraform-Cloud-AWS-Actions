@@ -104,6 +104,18 @@ resource "aws_instance" "terraformvms" {
       events = [after_create]
       actions = [action.aap_eda_eventstream_post.create[count.index]]
     }
+    # action_trigger {
+    #  events = [after_create]
+    #  actions = [action.aap_workflow_job_launch.aftercreate[count.index]]
+    # }
+    # action_trigger {
+    #  events = [before_destroy]
+    #  actions = [action.aap_workflow_job_launch.beforedestroy[count.index]]
+    # }
+    # action_trigger {
+    #  events = [after_destroy]
+    #  actions = [action.aap_job_launch.afterdestroy[count.index]]
+    # }
   }
 }
 
@@ -121,3 +133,36 @@ action "aap_eda_eventstream_post" "create" {
     }
   }
 }
+#   action "aap_workflow_job_launch" "aftercreate" {
+#   count                 = var.number_of_instances
+#   config {
+#     job_template_id     = 1279
+#     wait_for_completion = true
+#     extra_vars          = jsonencode({
+#       vm_name           = aws_instance.terraformvms[count.index].tags.Name
+#       ticket_number     = var.ticket_number
+#       shadowman_provision_hypervisor = "AWS"
+#     })
+#   }
+#   }
+#   action "aap_workflow_job_launch" "beforedestroy" {
+#   count                 = var.number_of_instances
+#   config {
+#     job_template_id     = 958
+#     wait_for_completion = true
+#     extra_vars          = jsonencode({
+#       vm_name           = aws_instance.terraformvms[count.index].tags.Name
+#       ticket_number     = var.ticket_number
+#     })
+#   }
+# }
+#   action "aap_job_launch" "afterdestroy" {
+#   count                 = var.number_of_instances
+#   config {
+#     job_template_id     = 1282
+#     wait_for_completion = true
+#     extra_vars          = jsonencode({
+#       shadowman_provision_hypervisor = "AWS"
+#     })
+#   }
+# }
