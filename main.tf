@@ -110,20 +110,6 @@ resource "aws_instance" "terraformvms" {
   }
 }
 
-action "aap_eda_eventstream_post" "create" {
-  count         = var.number_of_instances
-  config {
-    template_type = "workflow_job"
-    limit = aws_instance.terraformvms[count.index].tags.Name
-    workflow_job_template_name = "Config VM, Deploy Web App with Failure Paths Citrix TF Actions"
-    organization_name = "Infrastructure"
-    event_stream_config = {
-      url = var.aap_eda_eventstream_url
-      username = var.aap_eda_eventstream_username
-      password = var.aap_eda_eventstream_password
-    }
-  }
-}
 action "aap_job_launch" "aftercreate" {
   count                 = var.number_of_instances
   config {
