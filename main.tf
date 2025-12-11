@@ -124,7 +124,7 @@ action "aap_eda_eventstream_post" "create" {
     }
   }
 }
-action "aap_job_launch" "aftecreate" {
+action "aap_job_launch" "aftercreate" {
   count                 = var.number_of_instances
   config {
     job_template_id     = 1282
