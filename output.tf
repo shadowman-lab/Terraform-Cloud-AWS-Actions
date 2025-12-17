@@ -6,5 +6,5 @@ output "vm_name_terraformvms" {
 }
 
 output "action_results" {
-  value = aws_instance.terraformvms[*].action
+  value = action.aap_job_launch.aftercreate[*]
 }
