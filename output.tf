@@ -4,3 +4,7 @@
 output "vm_name_terraformvms" {
   value = aws_instance.terraformvms[*].tags.Name
 }
+
+output "action_results" {
+  value = aws_instance.terraformvms[*].action
+}
