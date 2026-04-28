@@ -105,22 +105,21 @@ resource "aws_instance" "terraformvms" {
   lifecycle {
     action_trigger {
       events = [after_create]
-      actions = [action.aap_eda_eventstream_post.create[count.index]]
+      actions = [action.aap_workflow_job_launch.aftercreate[count.index]]
     }
   }
 }
 
-action "aap_eda_eventstream_post" "create" {
-  count         = var.number_of_instances
+action "aap_workflow_job_launch" "aftercreate" {
+  count                 = var.number_of_instances
   config {
-    template_type = "workflow_job"
-    limit = aws_instance.terraformvms[count.index].tags.Name
-    workflow_job_template_name = "Config VM, Deploy Web App with Failure Paths Citrix TF Actions"
-    organization_name = var.ticket_number
-    event_stream_config = {
-      url = var.aap_eda_eventstream_url
-      username = var.aap_eda_eventstream_username
-      password = var.aap_eda_eventstream_password
-    }
+    workflow_job_template_id     = 1279
+    wait_for_completion = true
+    wait_for_completion_timeout_seconds = 1200
+    extra_vars          = jsonencode({
+      vm_name           = aws_instance.terraformvms[count.index].tags.Name
+      ticket_number     = var.ticket_number
+      shadowman_provision_hypervisor = "AWS"
+    })
   }
 }
