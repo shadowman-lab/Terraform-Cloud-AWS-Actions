@@ -99,7 +99,7 @@ resource "aws_instance" "terraformvms" {
       owner: "adworjan"
       env: "dev"
       operating_system: var.rhel_version
-      usage: "shadowmandemo"
+      usage: "shadowmandemos"
       }
 
   lifecycle {
